@@ -14,6 +14,6 @@ public class Contact {
 
     @OneToOne
     private ContactDetails contactDetails;
-    @ManyToMany(mappedBy = "accountList")
-    private List<Account> accounts = new ArrayList<>();
+//    @ManyToMany(mappedBy = "accountList")
+//    private List<Account> accounts = new ArrayList<>();
 }
