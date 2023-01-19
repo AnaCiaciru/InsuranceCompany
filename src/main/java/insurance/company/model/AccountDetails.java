@@ -1,9 +1,6 @@
 package insurance.company.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 /**
 Account Name: Get Cloudy
@@ -17,18 +14,19 @@ Billing State/Province: NV
  */
 
 @Entity
+@Table(name = "account_details")
 public class AccountDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int accDetailsId;
+    private int accountDetailsId;
     private String phone;
     private int accountNumber;
     private String type;
     private String billingCity;
 
-    public AccountDetails(int accDetailsId,  String phone, int accountNumber, String type, String billingCity) {
-        this.accDetailsId = accDetailsId;
+    public AccountDetails(int accountDetailsId, String phone, int accountNumber, String type, String billingCity) {
+        this.accountDetailsId = accountDetailsId;
         this.phone = phone;
         this.accountNumber = accountNumber;
         this.type = type;
@@ -39,12 +37,12 @@ public class AccountDetails {
 
     }
 
-    public int getAccDetailsId() {
-        return accDetailsId;
+    public int getAccountDetailsId() {
+        return accountDetailsId;
     }
 
-    public void setAccDetailsId(int accDetailsId) {
-        this.accDetailsId = accDetailsId;
+    public void setAccountDetailsId(int accountDetailsId) {
+        this.accountDetailsId = accountDetailsId;
     }
 
     public String getPhone() {
@@ -77,5 +75,16 @@ public class AccountDetails {
 
     public void setBillingCity(String billingCity) {
         this.billingCity = billingCity;
+    }
+
+    @Override
+    public String toString() {
+        return "AccountDetails{" +
+                "accountDetailsId=" + accountDetailsId +
+                ", phone='" + phone + '\'' +
+                ", accountNumber=" + accountNumber +
+                ", type='" + type + '\'' +
+                ", billingCity='" + billingCity + '\'' +
+                '}';
     }
 }
