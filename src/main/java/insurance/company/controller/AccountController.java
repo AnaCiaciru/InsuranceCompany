@@ -1,7 +1,6 @@
 package insurance.company.controller;
 
 import insurance.company.model.Account;
-import insurance.company.model.AccountDetails;
 import insurance.company.service.AccountService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,11 +30,6 @@ public class AccountController {
         return new ResponseEntity<>(accounts, HttpStatus.OK);
     }
 
-    @PostMapping("/addAccountDetails")
-    public ResponseEntity<AccountDetails> addAccount(@RequestBody AccountDetails accountDetails) {
-        AccountDetails newAccountDetails = accountService.addAccountDetails(accountDetails);
-        return new ResponseEntity<>(newAccountDetails, HttpStatus.CREATED);
-    }
     @PostMapping("/addAccount")
     public ResponseEntity<Account> addAccount(@RequestBody Account account,
                                               @RequestParam int accountDetailsId) {
@@ -57,11 +51,4 @@ public class AccountController {
     }
 
 
-//    @PostMapping("/saveAccount")
-//    public ResponseEntity<Account> saveAccount(@RequestBody Account account,
-//                                               @RequestParam AccountDetails accountDetails) {
-//        Account newAccount = accountService.saveAccount(account, accountDetails);
-//        return new ResponseEntity<>(newAccount, HttpStatus.CREATED);
-//
-//    }
 }

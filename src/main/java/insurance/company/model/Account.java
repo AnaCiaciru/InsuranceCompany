@@ -1,6 +1,10 @@
 package insurance.company.model;
-
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import net.minidev.json.annotate.JsonIgnore;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Account {
@@ -8,18 +12,31 @@ public class Account {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int accountId;
 
+    @NotBlank
     private String accountName;
     @OneToOne
     @JoinColumn(name = "account_details_id")
     private AccountDetails accountDetails;
 
-//    @ManyToMany
-//    @JoinTable(name = )
-//    private List<Contact> contacts = new ArrayList<>();
+    @OneToMany(mappedBy = "account")
+    @JsonIgnore
+    private final List<InsurancePolicy> policyList = new ArrayList<>();
 
-    public Account() {
+    @ManyToMany(mappedBy = "accountList")
+    @JsonIgnore
+    private final List<Contact> contacts = new ArrayList<>();
 
+    public Account() {}
+
+    @Override
+    public String toString() {
+        return "Account{" +
+                "accountId=" + accountId +
+                ", accountName='" + accountName + '\'' +
+                ", accountDetails=" + accountDetails +
+                '}';
     }
+
 
     public Account(int accountId, String accountName, AccountDetails accountDetails) {
         this.accountId = accountId;
@@ -51,12 +68,4 @@ public class Account {
         this.accountDetails = accountDetails;
     }
 
-    @Override
-    public String toString() {
-        return "Account{" +
-                "accountId=" + accountId +
-                ", accountName='" + accountName + '\'' +
-                ", accountDetails=" + accountDetails +
-                '}';
-    }
 }

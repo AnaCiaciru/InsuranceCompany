@@ -14,28 +14,14 @@ public class AccountService {
 
     private final AccountRepository accountRepository;
     private final AccountDetailsRepository accountDetailsRepository;
-    private final InsurancePolicyRepository insurancePolicyRepository;
-    private final CommissionRepository commissionRepository;
-    private final CaseRepository caseRepository;
-    private final ContactRepository contactRepository;
-    private final ContactDetailsRepository contactDetailsRepository;
-    private final PaymentProfileRepository paymentProfileRepository;
 
-    public AccountService(AccountRepository accountRepository, AccountDetailsRepository accountDetailsRepository, InsurancePolicyRepository insurancePolicyRepository, CommissionRepository commissionRepository, CaseRepository caseRepository, ContactRepository contactRepository, ContactDetailsRepository contactDetailsRepository, PaymentProfileRepository paymentProfileRepository) {
+
+
+    public AccountService(AccountRepository accountRepository, AccountDetailsRepository accountDetailsRepository) {
         this.accountRepository = accountRepository;
         this.accountDetailsRepository = accountDetailsRepository;
-        this.insurancePolicyRepository = insurancePolicyRepository;
-        this.commissionRepository = commissionRepository;
-        this.caseRepository = caseRepository;
-        this.contactRepository = contactRepository;
-        this.contactDetailsRepository = contactDetailsRepository;
-        this.paymentProfileRepository = paymentProfileRepository;
     }
 
-    public AccountDetails addAccountDetails(AccountDetails accountDetails){
-        System.out.println(accountDetails);
-        return accountDetailsRepository.save(accountDetails);
-    }
     public Account addAccount(Account account, int accountDetailsId){
         AccountDetails accountDetails = (accountDetailsRepository.findById(accountDetailsId)
                 .orElseThrow(() -> new RuntimeException("Account Details with this Id not found!")));
@@ -56,10 +42,6 @@ public class AccountService {
         accountRepository.deleteAccountByAccountId(accountId);
     }
 
-    public Account saveAccount(Account account, AccountDetails accountDetails){
-        account.setAccountDetails(accountDetails);
-        return accountRepository.save(account);
-    }
 
     public List<Account> getAccounts(){
         return accountRepository.findAll();
